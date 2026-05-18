@@ -11,7 +11,8 @@ const {
     getExtras,
     getMenuDay,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getCategories
 } = require('../controllers/product.controller');
 
 // Public
@@ -39,6 +40,11 @@ router.delete(
     verifyToken,
     isAdmin,
     deleteProduct
+);
+
+router.get(
+    '/categories',
+    getCategories
 );
 
 module.exports = router;
