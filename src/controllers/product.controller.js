@@ -208,11 +208,39 @@ const deleteProduct = async (req, res) => {
     }
 };
 
+const getCategories =
+async (req, res) => {
+
+    try {
+
+        const result =
+            await pool.query(
+                `SELECT * 
+                 FROM categories
+                 ORDER BY id ASC`
+            );
+
+        res.json(
+            result.rows
+        );
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            message:
+                'Error obteniendo categorías'
+        });
+    }
+};
+
 module.exports = {
     createProduct,
     getProducts,
     getExtras,
     getMenuDay,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getCategories
 };
