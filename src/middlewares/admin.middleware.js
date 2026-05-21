@@ -1,13 +1,28 @@
-const isAdmin = (req, res, next) => {
+const isAdmin = (
+    req,
+    res,
+    next
+) => {
 
-    if (req.user.rol !== 'admin') {
+    console.log(
+        'ROL USER:',
+        req.user
+    );
 
-        return res.status(403).json({
-            message: 'Acceso denegado'
-        });
+    if (
+        req.user.rol !==
+        'admin'
+    ) {
+
+        return res.status(403)
+            .json({
+                message:
+                    'Acceso denegado'
+            });
     }
 
     next();
 };
 
-module.exports = isAdmin;
+module.exports =
+    isAdmin;
