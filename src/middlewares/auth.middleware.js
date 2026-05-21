@@ -4,31 +4,59 @@ const verifyToken = (req, res, next) => {
 
     try {
 
-        const authHeader = req.headers.authorization;
+        const authHeader =
+            req.headers.authorization;
+
+        console.log(
+            'AUTH HEADER:',
+            authHeader
+        );
 
         if (!authHeader) {
+
             return res.status(401).json({
-                message: 'Token requerido'
+                message:
+                    'Token requerido'
             });
         }
 
-        const token = authHeader.split(' ')[1];
+        const token =
+            authHeader.split(' ')[1];
 
-        const verified = jwt.verify(
-            token,
-            process.env.JWT_SECRET
+        console.log(
+            'TOKEN RECIBIDO:',
+            token
         );
 
-        req.user = verified;
+        const verified =
+            jwt.verify(
+                token,
+                process.env.JWT_SECRET
+            );
+
+        console.log(
+            'JWT VERIFY:',
+            verified
+        );
+
+        req.user =
+            verified;
 
         next();
 
     } catch (error) {
 
+        console.log(
+            'JWT ERROR:',
+            error.message
+        );
+
         return res.status(401).json({
-            message: 'Token inválido'
+            message:
+                'Token inválido'
         });
     }
 };
 
-module.exports = verifyToken;
+module.exports =
+    verifyToken;
